@@ -7,6 +7,7 @@ const params = {
   EllipseWidth: 7.33,
   EllipseHeight: 6.26,
   GlitchFactor: 25,
+  // GlitchFactor: 1, //text AI location confimation
 };
 // const params = {
 //   Size: 7,
@@ -20,26 +21,46 @@ pane.addInput(params, "EllipseWidth", { min: 2, max: 100 });
 pane.addInput(params, "EllipseHeight", { min: 2, max: 100 });
 pane.addInput(params, "GlitchFactor", { min: 1, max: 100 });
 
-
 let importedImg;
 let factor;
-function preload() {
 
+function preload() {
   //UPLOAD IMAGE and REPLACE HERE
-  importedImg = loadImage("assets/FAIR_TEXT.png");
+  importedImg = loadImage("assets/FAIR_TEXT.png"); //LOGO
+  myFont = loadFont("assets/fonts/Merriweather-Italic.ttf");
 }
 
 function setup() {
   createCanvas(importedImg.width, importedImg.height);
   noStroke();
-  //frameRate(8);//noLoop();
+  // frameRate(8);
+  // noLoop();
 }
 
 function draw() {
-  background("white");
-  //background("black");
+  // background("white");
+  clear();
+  //  background("black");
   pixelShift();
+  addText();
   
+}
+
+function addText() {
+  let letterSpacing = 1; 
+  let upLift = 35
+  let pushLeft = 100
+
+  fill('#363636');
+  textFont(myFont); 
+  textSize(importedImg.height + 50); 
+  textStyle(ITALIC); 
+  textAlign(CENTER, CENTER); 
+
+  let x = width / 2 - pushLeft - letterSpacing / 2 ; 
+  text("A", x, height / 2 - upLift); 
+  x += textWidth("A") + letterSpacing - 40; 
+  text("I", x, height / 2 - upLift);  
 }
 
 function pixelShift() {
@@ -74,7 +95,6 @@ function keyPressed() {
     let glitchFactor = params.GlitchFactor.toFixed(2);
 
     let filename = `myCanvas_S${size}_EW${ellipseWidth}_EH${ellipseHeight}_GF${glitchFactor}`;
-
     filename = filename.replace(/\./g, 'o');
 
     saveCanvas(filename, 'png');
