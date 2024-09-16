@@ -1,13 +1,12 @@
 // require https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.min.js
 // require https://cdn.jsdelivr.net/npm/tweakpane@3.0.7/dist/tweakpane.min.js
-const pane = new Tweakpane.Pane();
 
 const params = {
-  Size: 5.2,
-  EllipseWidth: 7.33,
-  EllipseHeight: 6.26,
+  Size: 9,
+  EllipseWidth: 10,
+  EllipseHeight: 10,
   GlitchFactor: 25,
-  // GlitchFactor: 1, //text AI location confimation
+  // GlitchFactor: 1, //text "AI" location debug
 };
 // const params = {
 //   Size: 7,
@@ -16,17 +15,22 @@ const params = {
 //   GlitchFactor: 25,
 // };
 
-pane.addInput(params, "Size", { min: 3, max: 20 });
-pane.addInput(params, "EllipseWidth", { min: 2, max: 100 });
-pane.addInput(params, "EllipseHeight", { min: 2, max: 100 });
-pane.addInput(params, "GlitchFactor", { min: 1, max: 100 });
+function showTweak() {
+  const pane = new Tweakpane.Pane();
+  pane.addInput(params, "Size", { min: 3, max: 20 });
+  pane.addInput(params, "EllipseWidth", { min: 2, max: 100 });
+  pane.addInput(params, "EllipseHeight", { min: 2, max: 100 });
+  pane.addInput(params, "GlitchFactor", { min: 1, max: 100 });
+}
+// showTweak() //for Live chaning the glitch effect
 
 let importedImg;
 let factor;
 
 function preload() {
   //UPLOAD IMAGE and REPLACE HERE
-  importedImg = loadImage("assets/FAIR_TEXT.png"); //LOGO
+  // importedImg = loadImage("assets/FAIR_TEXT.png"); //LOGO
+  importedImg = loadImage("assets/other/pre_glich_Insta_post_1.png"); //other image (dont forget to create "other" within the assets folder)
   myFont = loadFont("assets/fonts/Merriweather-Italic.ttf");
 }
 
@@ -42,7 +46,7 @@ function draw() {
   clear();
   //  background("black");
   pixelShift();
-  addText();
+  // addText(); // LOGO Adding "AI" text, 
   
 }
 
