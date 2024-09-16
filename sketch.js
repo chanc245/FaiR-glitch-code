@@ -29,8 +29,8 @@ let factor;
 
 function preload() {
   //UPLOAD IMAGE and REPLACE HERE
-  // importedImg = loadImage("assets/FAIR_TEXT.png"); //LOGO
-  importedImg = loadImage("assets/other/pre_glich_Insta_post_1.png"); //other image (dont forget to create "other" within the assets folder)
+  importedImg = loadImage("assets/FAIR_TEXT.png"); //LOGO
+  // importedImg = loadImage("assets/other/banner_event.jpg"); //other image (dont forget to create "other" within the assets folder)
   myFont = loadFont("assets/fonts/Merriweather-Italic.ttf");
 }
 
@@ -46,7 +46,7 @@ function draw() {
   clear();
   //  background("black");
   pixelShift();
-  // addText(); // LOGO Adding "AI" text, 
+  addText(); // LOGO Adding "AI" text, 
   
 }
 
