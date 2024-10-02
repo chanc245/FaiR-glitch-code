@@ -153,7 +153,6 @@ function pixelShift() {
 }
 
 function pixelShift_addBG() {
-  
   factor = params.Size;
   let glitchFactor = params.GlitchFactor;
   let yOffset = 250; 
@@ -187,7 +186,6 @@ function pixelShift_addBG2() {
     }
   }
 }
-
 
 function keyPressed() {
   if (key == 's' || key == 'S') {
