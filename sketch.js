@@ -29,25 +29,47 @@ let factor;
 
 function preload() {
   //UPLOAD IMAGE and REPLACE HERE
-  importedImg = loadImage("assets/FAIR_TEXT.png"); //LOGO
-  // importedImg = loadImage("assets/other/banner_event.jpg"); //other image (dont forget to create "other" within the assets folder)
+  // importedImg = loadImage("assets/FAIR_TEXT.png"); //LOGO
+  
+  // V instagram post 
+  // importedImg = loadImage("assets/FAIR_TEXT_W.png");
+  // importedImg1 = loadImage("assets/other/Insta_post_1.png"); //other image (dont forget to create "other" within the assets folder)
+  
+  // importedImg = loadImage("assets/other/post_2.png"); //other image (dont forget to create "other" within the assets folder)
+  importedImg = loadImage("assets/party_background.png")
+
   myFont = loadFont("assets/fonts/Merriweather-Italic.ttf");
 }
 
 function setup() {
+  // createCanvas(importedImg1.width, importedImg1.height);
   createCanvas(importedImg.width, importedImg.height);
   noStroke();
-  // frameRate(8);
+  frameRate(10);
   // noLoop();
 }
 
 function draw() {
   // background("white");
+  // background("black");
   clear();
-  //  background("black");
+
+  // fairPartySocialMedia();
+
+  image(importedImg, 0, 0);
   pixelShift();
-  addText(); // LOGO Adding "AI" text, 
+
+  // addText(); // LOGO Adding "AI" text, 
+  // addText_BG()
+  addText_AI()
   
+}
+
+function fairPartySocialMedia(){
+  let n = 400
+  image(importedImg1, 0, 0, importedImg1.width / 3 * 2 + n, importedImg1.height / 3 * 2 + n);
+  pixelShift_addBG2()
+  pixelShift_addBG()
 }
 
 function addText() {
@@ -64,7 +86,46 @@ function addText() {
   let x = width / 2 - pushLeft - letterSpacing / 2 ; 
   text("A", x, height / 2 - upLift); 
   x += textWidth("A") + letterSpacing - 40; 
-  text("I", x, height / 2 - upLift);  
+  text("I", x, height / 2 - upLift); 
+}
+
+function addText_AI() {
+  let letterSpacing = 1; 
+  let upLift = 160
+  let pushLeft = 150
+
+  fill('FFFFFF')
+  textFont(myFont); 
+  textSize(importedImg.height / 2 - 180); 
+  textStyle(ITALIC); 
+  textAlign(CENTER, CENTER); 
+
+  let x = width / 2 - pushLeft - letterSpacing / 2 ; 
+  text("A", x, height / 2 - upLift); 
+  x += textWidth("A") + letterSpacing - 40; 
+  text("I", x, height / 2 - upLift); 
+}
+
+function addText_BG(){
+  let letterSpacing = 1; 
+  let upLiftBG = 170
+  let pushLeftBG = 110
+  let upLiftP = 100
+
+  fill('#363636');
+  fill('FFFFFF')
+  textFont(myFont); 
+  textSize(importedImg.height + 50); 
+  textStyle(ITALIC); 
+  textAlign(CENTER, CENTER); 
+
+  let x = width / 2 - pushLeftBG - letterSpacing / 2 ; 
+  text("A", x, height / 2 - upLiftBG); 
+  x += textWidth("A") + letterSpacing - 40; 
+  text("I", x, height / 2 - upLiftBG);  
+
+  textSize(importedImg.height + -70); 
+  text("PARTY", x - 110, height / 2 + upLiftP)
 }
 
 function pixelShift() {
@@ -90,6 +151,43 @@ function pixelShift() {
   // }
   //filter(BLUR, 3);
 }
+
+function pixelShift_addBG() {
+  
+  factor = params.Size;
+  let glitchFactor = params.GlitchFactor;
+  let yOffset = 250; 
+  let xOffset = 150;
+
+  importedImg.loadPixels();
+
+  for (let y = 0; y < importedImg.height; y += factor) {
+    for (let x = 0; x < importedImg.width; x += factor) {
+      const this_color = importedImg.get(x, y);
+      fill(this_color);
+      let N = noise(x * 0.04, frameCount * 0.05) * glitchFactor * 2 - glitchFactor;
+      
+      rect(x + xOffset, y + N + yOffset, params.EllipseWidth, params.EllipseHeight, 0);
+    }
+  }
+}
+
+function pixelShift_addBG2() {
+  factor = params.Size;
+  //image(importedImg, 0, 0);
+  let glitchFactor = params.GlitchFactor;
+  importedImg1.loadPixels();
+
+  for (let y = 0; y < importedImg1.height; y += factor) {
+    for (let x = 0; x < importedImg1.width; x += factor) {
+      const this_color = importedImg1.get(x, y);
+      fill(this_color);
+      let N = noise(x*0.04, frameCount*0.05)*glitchFactor*2 - glitchFactor; 
+      rect(x, y+N, params.EllipseWidth, params.EllipseHeight, 0);
+    }
+  }
+}
+
 
 function keyPressed() {
   if (key == 's' || key == 'S') {
